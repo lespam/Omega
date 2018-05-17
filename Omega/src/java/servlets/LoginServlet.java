@@ -20,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -99,13 +100,23 @@ public class LoginServlet extends HttpServlet {
                 //ROOT.OMEGA FETCH FIRST 100 ROWS ONLY
                 //out.println("inn");
                 if (rs.next()) {
+                    
+                    HttpSession mysession = request.getSession();
+                    mysession.setAttribute("name", name);
+                    mysession.setMaxInactiveInterval(20);
+                    response.sendRedirect("welcome.jsp");
+                    
 
-                    String next = "/welcome.jsp";
+                    
+                    //String next = "/welcome.jsp";
 
-                    RequestDispatcher dispatcher
-                            = getServletContext().getRequestDispatcher(next);
-
-                    dispatcher.forward(request, response);
+                    //RequestDispatcher dispatcher
+                    //        = getServletContext().getRequestDispatcher(next);
+                    
+                    //request.setAttribute("name", name);
+                    //request.setAttribute("password", password);
+                    
+                    //dispatcher.forward(request, response);
                     //    out.println("siexiste");
                     //    String db_name = rs.getString("NAME");
                     //    String db_password = rs.getString("PASSWORD");
