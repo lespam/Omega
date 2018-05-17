@@ -4,6 +4,10 @@
     Author     : sdist
 --%>
 
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,19 +18,27 @@
     <body>
         HI
         <%
-            if( request.getParameter("username")!=null && request.getParameter("password")!=null){
-                if(request.getParameter("password").equals("123")){
-                    HttpSession mysession = request.getSession();
-                    mysession.setAttribute("username", request.getParameter("username"));
-                    mysession.setMaxInactiveInterval(20);
-                    out.println("Bienvenido, "+request.getParameter("username")+"<br>");
-                    out.println("<hr>");
-                    out.println("<a href='profile.jsp'>Visita tu perfil</a>");
-                } else {
-                    response.sendRedirect("index.html");
-                }
+            //HttpSession mysession = request.getSession();
+            //if( mysession.getAttribute("name")!=null){
+            //    out.println("<h1>" + mysession.getAttribute("name") + " este es tu perfil</h1><br>");
+            //    out.println("<a href='SignOut'>Cerrar sesión</a>");
+            // }
+        %>
+
+        <%
+            String username = request.getParameter("name");
+            String password = request.getParameter("password");
+
+            if (request.getParameter("name") != null && request.getParameter("password") != null) {
+                HttpSession mysession = request.getSession();
+                mysession.setAttribute("name", request.getParameter("name"));
+                mysession.setMaxInactiveInterval(20);
+                out.println("Bienvenido, " + request.getParameter("name") + "<br>");
+                out.println("<hr>");
+                out.println("<a href='profile.jsp'>Visita tu perfil</a>");
             } else {
-                response.sendRedirect("index.html");
+                out.println("aja");
+//response.sendRedirect("index.jsp");
             }
         %>
     </body>

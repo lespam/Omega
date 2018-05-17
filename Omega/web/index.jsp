@@ -5,6 +5,7 @@
 --%>
 
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,18 +16,19 @@
     </head>
     <body>
         
+            
         <form action="LoginServlet">
             <table border="1">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th><input type="text" name="username" value="LesPam" /></th>
+                        <th><input type="text" name="name" value="admin" /></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="password" value="abc" /></td>
+                        <td><input type="password" name="password" value="admin" /></td>
                     </tr>
                     <tr>
                         <td><a href="/Omega/signup.jsp">Sign Up</a></td>

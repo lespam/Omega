@@ -10,10 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,51 +40,31 @@ public class SignUp extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/omega;create=true;",
-                    "root", "root");
-            Statement query = con.createStatement();
-            try{
-            String QueryString = "create table omega (id int not null, name "
-                    + "varchar(25),password varchar(20), primary key(id))";
-            query.executeUpdate(QueryString);
-            query.executeUpdate("INSERT INTO OMEGA VALUES (1, 'admin', 'admin')");
-            }
-            catch( SQLException e ) {
-                
-            }
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            int id = (int)timestamp.getTime();
-            out.println();
             
-            String name = request.getParameter("name");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
-
+            
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
-            con =
+            Connection con =
+
             DriverManager.getConnection(
                     "jdbc:derby://localhost:1527/omega",
                     "root",
-                    "root");
+                    "admin");
+            
+            Statement query = con.createStatement();
             
             if(request.getParameter("ADD")!=null){
-            query.executeUpdate("INSERT INTO ROOT.OMEGA VALUES ("+id+", '"+name+"', '"+password+"')");
+            query.executeUpdate("INSERT INTO ROOT.USERS VALUES ('"+username+"', '"+password+"')");
             }
-            
-            ResultSet rs = query.executeQuery("SELECT * FROM OMEGA");
-            out.println("<p>");
-            while (rs.next()) {
-                out.println("<BR>Id: " + rs.getInt("id"));
-                out.println(" Name: " + rs.getString("name"));
-            }
-            
-           con.commit();
-           con.close();
            
+            String next = "/welcome.jsp";
             
-            
-            
+            RequestDispatcher dispatcher =
+            getServletContext().getRequestDispatcher(next);
+
+            dispatcher.forward(request,response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

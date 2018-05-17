@@ -18,20 +18,7 @@
     <body>
         HI
         <%
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/mySixthDatabase;create=true;",
-                    "root", "root");
-            Statement query = con.createStatement();
-            String QueryString = "create table MySixthTable (id int not null, name "
-                    + "varchar(25),gender varchar(20),address varchar(50),phone varchar(20), primary key(id))";
-            query.executeUpdate(QueryString);
-            query.executeUpdate("INSERT INTO MySixthTable VALUES (4, 'Jose', 'Male', 'Great Avenue #123', '(55) 1234 1234')");
-            ResultSet rs = query.executeQuery("SELECT * FROM MySixthTable");
-            out.println("<p>");
-            while (rs.next()) {
-                out.println("<BR>Id: " + rs.getInt("id"));
-                out.println(" Name: " + rs.getString("name"));
-            }
+            
 
             if (request.getParameter("username") != null && request.getParameter("password") != null) {
                 if (request.getParameter("password").equals("123")) {

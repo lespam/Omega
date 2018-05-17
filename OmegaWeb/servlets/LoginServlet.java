@@ -41,12 +41,12 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
-            //out.println("<!DOCTYPE html>");
-            //out.println("<html>");
-            //out.println("<head>");
-            //out.println("<title>Servlet DataPresenter</title>");
-            //out.println("</head>");
-            //out.println("<body>");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DataPresenter</title>");
+            out.println("</head>");
+            out.println("<body>");
             out.println("Checking...");
 //            String nextJSP = "/link.html";
 //            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -70,10 +70,9 @@ public class LoginServlet extends HttpServlet {
 //                dispatcher.include(request, response);
 //                
 //            }
-            String name = request.getParameter("name");
-            //out.println("puso "+name);
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
-            //out.println("puso "+password);
+
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
             Connection con
@@ -84,40 +83,24 @@ public class LoginServlet extends HttpServlet {
 
             Statement query = con.createStatement();
 
-            ResultSet rs = query.executeQuery("SELECT * FROM ROOT.OMEGA WHERE NAME = '" + name + "'");
-            //out.println("buscando");
+            ResultSet rs = query.executeQuery("SELECT * FROM ROOT.USERS WHERE USERNAME = '" + username + "'");
+            out.println("buscando");
 
             if (!rs.next()) {
-                String nextJSP = "/index.jsp";
-                out.println("Inrgeso incorrecto. Intenta de nuevo.");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
-                dispatcher.include(request, response);
-
+                out.println("nuexiste");
             } else {
-
-                //rs = query.executeQuery("SELECT * FROM ROOT.OMEGA WHERE NAME = '" + name + "'");
-                //ROOT.OMEGA FETCH FIRST 100 ROWS ONLY
-                //out.println("inn");
                 if (rs.next()) {
-
-                    String next = "/welcome.jsp";
-
-                    RequestDispatcher dispatcher
-                            = getServletContext().getRequestDispatcher(next);
-
-                    dispatcher.forward(request, response);
-                    //    out.println("siexiste");
-                    //    String db_name = rs.getString("NAME");
-                    //    String db_password = rs.getString("PASSWORD");
-                    //    out.println("Name: " + db_name);
-                    //    out.println("Password: " + db_password);
+                    out.println("siexiste");
+                    String db_username = rs.getString("USERNAME");
+                    String db_password = rs.getString("PASSWORD");
+                    out.println("Userame: " + db_username);
+                    out.println("Password: " + db_password);
                 }
-
             }
-
-            //out.println("</body>");
-            //out.println("</html>");
+            out.println("</body>");
+            out.println("</html>");
             //String next = "/welcome.jsp";
+
             //RequestDispatcher dispatcher
             //        = getServletContext().getRequestDispatcher(next);
             //dispatcher.forward(request, response);

@@ -4,6 +4,10 @@
     Author     : LesPam
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +17,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <%
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/omega;create=true;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            String QueryString = "create table omega (id int not null, name "
+                    + "varchar(25),password varchar(20), primary key(id))";
+            query.executeUpdate(QueryString);
+            query.executeUpdate("INSERT INTO omega VALUES (1, 'admin', 'admin')");
+            ResultSet rs = query.executeQuery("SELECT * FROM omega");
+            out.println("<p>");
+            while (rs.next()) {
+                out.println("<BR>Id: " + rs.getInt("id"));
+                out.println(" Name: " + rs.getString("name"));
+            }
+        %>
         <form action="SignUp">
             <table border="1">
                 <thead>

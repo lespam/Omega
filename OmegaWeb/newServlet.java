@@ -3,20 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
 
-import java.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author LesPam
  */
-public class SignUp extends HttpServlet {
+public class newServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,55 +31,15 @@ public class SignUp extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/omega;create=true;",
-                    "root", "root");
-            Statement query = con.createStatement();
-            try{
-            String QueryString = "create table omega (id int not null, name "
-                    + "varchar(25),password varchar(20), primary key(id))";
-            query.executeUpdate(QueryString);
-            query.executeUpdate("INSERT INTO OMEGA VALUES (1, 'admin', 'admin')");
-            }
-            catch( SQLException e ) {
-                
-            }
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            int id = (int)timestamp.getTime();
-            out.println();
-            
-            String name = request.getParameter("name");
-            String password = request.getParameter("password");
-
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-            con =
-            DriverManager.getConnection(
-                    "jdbc:derby://localhost:1527/omega",
-                    "root",
-                    "root");
-            
-            if(request.getParameter("ADD")!=null){
-            query.executeUpdate("INSERT INTO ROOT.OMEGA VALUES ("+id+", '"+name+"', '"+password+"')");
-            }
-            
-            ResultSet rs = query.executeQuery("SELECT * FROM OMEGA");
-            out.println("<p>");
-            while (rs.next()) {
-                out.println("<BR>Id: " + rs.getInt("id"));
-                out.println(" Name: " + rs.getString("name"));
-            }
-            
-           con.commit();
-           con.close();
-           
-            
-            
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet newServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet newServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

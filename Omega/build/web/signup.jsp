@@ -4,7 +4,10 @@
     Author     : LesPam
 --%>
 
-<%@page import="java.Users"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,12 +17,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <%
+            
+        %>
         <form action="SignUp">
             <table border="1">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th><input type="text" name="username" value="username" /></th>
+                        <th><input type="text" name="name" value="name" /></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,4 +43,3 @@
         
     </body>
 </html>
-
