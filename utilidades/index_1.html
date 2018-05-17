@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function loadNewContent(id, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest) {
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function () {
+                    alert(ajaxRequest.readyState);
+                    if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
+                        var n = document.getElementById("caja").innerHTML.length;
+                        var txt = "";
+                        for (var i = 0; i < n; i++) {
+                            txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+                        }
+                                //= ajaxRequest.responseText;
+                    }
+                }
+                ajaxRequest.open("POST", target + "?nombre=Lespam&edad=23", true /*async*/);
+                ajaxRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                ajaxRequest.send("name=Octavio&age=49");
+            }
+        </script>
+    </head>
+    <body>
+        <div id="pato">grer</div>
+
+        <input id="caja" type="button" value="AJAX" onclick="loadnewContent('pato', 'pagina1.jsp');"/>
+    </body>
+</html>

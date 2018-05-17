@@ -14,20 +14,20 @@
     <body>
         HI
         <%
-            //if( request.getParameter("name")!=null && request.getParameter("password")!=null){
-            //    if(request.getParameter("password").equals("123")){
-             //       HttpSession mysession = request.getSession();
-              //      mysession.setAttribute("name", request.getParameter("name"));
-                //    mysession.setMaxInactiveInterval(20);
-                  //  out.println("Bienvenido, "+request.getParameter("name")+"<br>");
-                    //out.println("<hr>");
-                    //out.println("<a href='profile.jsp'>Visita tu perfil</a>");
-                //} else {
-                    //response.sendRedirect("index.html");
-                //}
-            //} else {
-              //  response.sendRedirect("index.html");
-            //}
+            if( request.getParameter("username")!=null && request.getParameter("password")!=null){
+                if(request.getParameter("password").equals("123")){
+                    HttpSession mysession = request.getSession();
+                    mysession.setAttribute("username", request.getParameter("username"));
+                    mysession.setMaxInactiveInterval(20);
+                    out.println("Bienvenido, "+request.getParameter("username")+"<br>");
+                    out.println("<hr>");
+                    out.println("<a href='profile.jsp'>Visita tu perfil</a>");
+                } else {
+                    response.sendRedirect("index.html");
+                }
+            } else {
+                response.sendRedirect("index.html");
+            }
         %>
     </body>
 </html>
