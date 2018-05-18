@@ -51,6 +51,11 @@ public class SignUp extends HttpServlet {
                     + "varchar(25),password varchar(20), primary key(id))";
             query.executeUpdate(QueryString);
             query.executeUpdate("INSERT INTO OMEGA VALUES (1, 'admin', 'admin')");
+            
+            //Crear el creador de tablas
+            QueryString = "create table usertables (id int not null, user_id int,table_id int, primary key(id))";
+            query.executeUpdate(QueryString);
+            query.executeUpdate("INSERT INTO OMEGA VALUES (1, 'admin', 'admin')");
             }
             catch( SQLException e ) {
                 
