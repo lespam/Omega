@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import java.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -77,6 +76,8 @@ public class SignUp extends HttpServlet {
             
             if(request.getParameter("ADD")!=null){
             query.executeUpdate("INSERT INTO ROOT.OMEGA VALUES ("+id+", '"+name+"', '"+password+"')");
+            query.executeUpdate("INSERT INTO ROOT.OMEGA VALUES ("+id+", '"+name+"', '"+password+"')");
+            
             }
             
             ResultSet rs = query.executeQuery("SELECT * FROM OMEGA");
@@ -84,6 +85,7 @@ public class SignUp extends HttpServlet {
             while (rs.next()) {
                 out.println("<BR>Id: " + rs.getInt("id"));
                 out.println(" Name: " + rs.getString("name"));
+                
             }
             
            con.commit();
